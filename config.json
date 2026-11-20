@@ -1,14 +1,11 @@
 {
-    "$schema": "https://schema.freqtrade.io/schema.json",
-    "max_open_trades": 6,
+    "dry_run": true,
+    "timerate": "15m",
     "stake_currency": "USDT",
     "stake_amount": 100,
     "tradable_balance_ratio": 0.99,
+    "max_open_trades": 6,
     "fiat_display_currency": "USD",
-    "dry_run": true,
-    "dry_run_wallet": 1000,
-    "timeframe": "15m",
-    "trading_mode": "spot",
     "strategy": "BbandRsi_Safe_v5",
     "exchange": {
         "name": "okx",
@@ -34,7 +31,6 @@
             "OP/USDT",
             "ARB/USDT",
             "APT/USDT",
-            "INJ/USDT",
             "SUI/USDT",
             "SEI/USDT"
         ],
@@ -60,10 +56,21 @@
         "use_order_book": true,
         "order_book_top": 1
     },
-    "bot_name": "bband_bot1",
+    "bot_name": "freqtradebot",
     "initial_state": "running",
     "force_entry_enable": false,
     "internals": {
         "process_throttle_secs": 5
+    },
+    "api_server": {
+        "enabled": true,
+        "listen_ip_address": "127.0.0.1",
+        "listen_port": 8080,
+        "verbosity": "info",
+        "enable_csp": true,
+        "jwt_secret_key": "somethingrandomsomethingrandom123",
+        "CORS_origins": [],
+        "username": "freqtrade",
+        "password": "Password_2qaz"
     }
 }
