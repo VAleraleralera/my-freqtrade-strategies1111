@@ -1,8 +1,9 @@
 FROM freqtradeorg/freqtrade:stable
 
-# Копируем твою стратегию из репозитория в папку стратегий бота
-COPY BbandRsi_Safe_v5.py /freqtrade/user_data/strategies/BbandRsi_Safe_v5.py
+# Копируем стратегию v7
+COPY BbandRsi_Hedge_v7.py /freqtrade/user_data/strategies/BbandRsi_Hedge_v7.py
+# Копируем конфиг
 COPY config.json /freqtrade/user_data/config.json
 
-# Запускаем бота (он возьмет стратегию из переменных Railway)
+# Запускаем бота
 CMD ["trade"]
