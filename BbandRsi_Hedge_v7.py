@@ -7,7 +7,7 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 class BbandRsi_Hedge_v7(IStrategy):
     """
     Финальная версия: Long & Short для фьючерсов.
-    Учтены: риск с плечом, гэпы, симметрия.
+    Учтены: риск с плечом, гэпы, симметрия. Плечо 3x.
     """
     INTERFACE_VERSION: int = 3
     can_short: bool = True
@@ -28,7 +28,7 @@ class BbandRsi_Hedge_v7(IStrategy):
         "120": 0.01   # 1%
     }
 
-    # СТОП-ЛОСС: 3% от цены. При плече 3x это 9% от маржи (безопаснее, чем 4%).
+    # СТОП-ЛОСС: 3% от цены. При плече 3x это 9% от маржи.
     stoploss = -0.03
     
     # 3. ТРЕЙЛИНГ-СТОП (Работает в обе стороны)
@@ -111,3 +111,7 @@ class BbandRsi_Hedge_v7(IStrategy):
         dataframe.loc[(dataframe['rsi'] > 70), 'exit_long'] = 1
         dataframe.loc[(dataframe['rsi'] < 30), 'exit_short'] = 1
         return dataframe
+
+    # 9. НАСТРОЙКА ПЛЕЧА (Добавлено!)
+    def leverage(self, pair: str, current_time, current_rate, proposed_leverage: float, max_leverage: float, entry_tag, side: str, **kwargs) -> float:
+        return 3.0
